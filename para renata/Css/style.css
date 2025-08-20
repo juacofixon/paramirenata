@@ -1,0 +1,221 @@
+/* -----------------------------
+   GENERAL
+------------------------------ */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fcfcfc;
+}
+
+/* -----------------------------
+   PANTALLA DE ACCESO
+------------------------------ */
+#access-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+}
+
+#access-screen input {
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: none;
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+#access-screen button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #ff8c94;
+  color: white;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#access-screen button:hover {
+  background: #ff6f61;
+}
+
+/* -----------------------------
+   FONDO ANIMALISTA
+------------------------------ */
+#background-forest {
+  position: fixed;
+  inset: 0;
+  background: url('Img/forest-bg.png') no-repeat center center/cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* -----------------------------
+   ÁRBOL
+------------------------------ */
+.tree-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+  transition: transform 1.2s cubic-bezier(.77,0,.18,1);
+}
+
+.tree-container.move-and-scale {
+  transform: translate(180px, -50%) scale(1.35);
+}
+
+.animated-heart {
+  transform-origin: center;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  0%,100%{transform:scale(1);}
+  20%{transform:scale(1.1);}
+  40%{transform:scale(0.95);}
+  60%{transform:scale(1.08);}
+  80%{transform:scale(1);}
+}
+
+/* -----------------------------
+   DEDICATORIA
+------------------------------ */
+.dedication-text {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  transform: translateY(-50%);
+  min-width: 320px;
+  max-width: 600px;
+  width: 60rem;
+  font-size: 1.5rem;
+  color: #050505;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-line;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  max-height: 90vh;
+  overflow: visible;
+  padding: 1em 1.5em;
+  background: rgba(255,255,255,0.92);
+  border-radius: 0.7em;
+  box-shadow: 0 2px 16px #e6002611;
+  transition: opacity 0.6s, max-width 0.4s, width 0.4s;
+}
+
+.dedication-text.typing {
+  opacity: 1;
+  animation: fadeInText 0.6s;
+}
+
+@keyframes fadeInText { from{opacity:0} to{opacity:1} }
+
+.signature {
+  position: relative;
+  top: auto; left:auto;
+  margin-top: 1.5em;
+  display: block;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: #e60026;
+  opacity: 0;
+  z-index: 5;
+  white-space: pre;
+  pointer-events: none;
+  transition: opacity 0.7s;
+}
+
+.signature.visible {
+  opacity: 1;
+  animation: signature-draw 2.2s steps(24) forwards;
+}
+
+@keyframes signature-draw {
+  from{clip-path: inset(0 100% 0 0);} 
+  to{clip-path: inset(0 0 0 0);}
+}
+
+/* -----------------------------
+   OBJETOS FLOTANTES (pétalos, hojas, mariposas)
+------------------------------ */
+#floating-objects {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floating-petal, .floating-butterfly, .floating-leaf {
+  position: absolute;
+  will-change: transform, opacity;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.floating-petal {
+  width: 24px; height: 32px;
+  background: radial-gradient(ellipse at 60% 30%, #ffd6e0 60%, #ff69b4 100%);
+  border-radius: 60% 40% 60% 40% / 60% 60% 40% 40%;
+}
+
+.floating-butterfly {
+  width: 36px; height: 36px;
+  background: url('Img/butterfly.png') no-repeat center/contain;
+}
+
+.floating-leaf {
+  width: 20px; height: 20px;
+  background: url('Img/leaf.png') no-repeat center/contain;
+}
+
+/* -----------------------------
+   COUNTDOWN
+------------------------------ */
+.countdown {
+  position: fixed;
+  left: 50%;
+  bottom: 3%;
+  transform: translateX(-50%) translateY(30px);
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  color: #333;
+  background: #fff8;
+  padding: 0.4em 1em;
+  border-radius: 1em;
+  z-index: 6;
+  pointer-events: none;
+  min-width: 220px;
+  text-align: center;
+  transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+  opacity: 0;
+}
+
+.countdown.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* -----------------------------
+   RESPONSIVO
+------------------------------ */
+@media (max-width: 700px) {
+  .dedication-text { left:50%; top:8%; transform:translateX(-50%) translateY(0); width:95vw; font-size:1.1rem; padding:0.7em;}
+  .signature { font-size:1.3rem; }
+}
